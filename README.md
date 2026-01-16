@@ -60,7 +60,7 @@ jobs:
 
       - id: output
         name: Output TF vars
-        uses: marcinbator/tofu-output@v1.0.0 # here
+        uses: marcinbator/export-tofu-output@v1.0.0 # here
         with:
           workdir: ./rds
 
