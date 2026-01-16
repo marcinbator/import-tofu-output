@@ -1,0 +1,28 @@
+name: Import Tofu output
+description: Import encoded OpenTofu variables passed in env to .tfvars.json file
+author: marcinbator
+branding:
+  icon: arrow-up
+  color: purple
+
+inputs:
+  workdir:
+    required: true
+    description: Tofu working directory
+
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        cd "${{ inputs.workdir }}"
+
+        echo "{}" > terraform.tfvars.json
+
+        for VAR in $(env | grep '_outputs=' | cut -d= -f1); do
+          SECRET_VALUE="${!VAR}"
+          DECODED=$(echo "$SECRET_VALUE" | base64 -d | base64 -d)
+          PROCESSED=$(echo "$DECODED" | jq 'with_entries(.value = .value.value)')
+          jq -s '.[0] * .[1]' terraform.tfvars.json <(echo "$PROCESSED") > merged.json
+          mv merged.json terraform.tfvars.json
+        done
