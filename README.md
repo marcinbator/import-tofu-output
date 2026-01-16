@@ -17,7 +17,7 @@ inputs:
 
 ## Example usage
 
-NOTE: this workflow works the best with `marcinbator/export-tofu-output@v1.0.0` (<https://github.com/marcinbator/export-tofu-output>) which encodes OpenTofu outputs to Base64 and exports them to single GITHUB_OUTPUT variable.
+NOTE: this workflow works the best with `marcinbator/export-tofu-output@v1.0.0` (<https://github.com/marcinbator/export-tofu-output>) which encodes OpenTofu outputs to Base64 and exports them to single GITHUB_OUTPUT variable (as shown in [Full example](#full-example) below).
 
 IMPORTANT: Base64 encoded outputs from previous job must be passed to this composite using `env`. You can pass multiple outputs (e.g. from multiple jobs), they will be all put together into one .tfvars.json file. Every env variable with outputs need to have `_outputs` suffix, as shown in the example.
 
