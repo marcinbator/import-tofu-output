@@ -2,7 +2,9 @@
 
 ## Description
 
-This action composite allows to import OpenTofu variables from envs to .tfvars.json file
+This action composite allows to import OpenTofu variables from envs to .tfvars.json file.
+
+The original idea for this was found on <https://github.com/orgs/community/discussions/25225#discussioncomment-6776295> discussion and belongs to [rdhar](https://github.com/rdhar).
 
 ## Inputs
 
@@ -16,8 +18,6 @@ inputs:
 ## Example usage
 
 NOTE: this workflow works the best with `marcinbator/export-tofu-output@v1.0.0` (<https://github.com/marcinbator/export-tofu-output>) which encodes OpenTofu outputs to Base64 and exports them to single GITHUB_OUTPUT variable.
-
-The original idea for this was found on <https://github.com/orgs/community/discussions/25225#discussioncomment-6776295> discussion and belongs to [rdhar](https://github.com/rdhar).
 
 IMPORTANT: Base64 encoded outputs from previous job must be passed to this composite using `env`. You can pass multiple outputs (e.g. from multiple jobs), they will be all put together into one .tfvars.json file. Every env variable with outputs need to have `_outputs` suffix, as shown in the example.
 
